@@ -1,9 +1,9 @@
-/* addpath.c
+/* dmpath.c
  *
- * Name: addpath
+ * Name: dmpath
  * Description: tool to add elements to PATH style variables
  *
- * Author: Tony Aiuto
+ * Author: Tony Aiuto, brinkqiang
  * Source: http://tony.aiu.to/sa https://github.com/tonyaiuto/addpath
  *
  * Copyright Tony Aiuto (c) 1990-2015
@@ -37,13 +37,13 @@ static	ShellType	shell_type = SH;
 
 static void pversion()
 {
-	printf("addpath url, https://github.com/tonyaiuto/addpath\n");
+	printf("dmpath %s, https://github.com/brinkqiang/dmpath\n", "1.0.1");
 }
 
 static void usage()
 {
 	pversion();
-	printf("usage: addpath [-bcw] [-df] [-e VAR] [-p VAR] elem ...\n");
+	printf("usage: dmpath [-bcw] [-df] [-e VAR] [-p VAR] elem ...\n");
 
 	printf("\tOnly one of bcw should be specified.  Default is detected by\n");
 	printf("\texamining $SHELL.\n");
