@@ -4,7 +4,7 @@
  * Description: tool to add elements to PATH style variables
  *
  * Author: Tony Aiuto, brinkqiang
- * Source: http://tony.aiu.to/sa https://github.com/tonyaiuto/addpath
+ * Source: http://tony.aiu.to/sa https://github.com/tonyaiuto/addpath https://github.com/brinkqiang/dmpath
  *
  * Copyright Tony Aiuto (c) 1990-2015
  */
