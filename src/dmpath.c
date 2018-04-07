@@ -10,7 +10,6 @@
  */
 
 
-#include <getopt.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -22,6 +21,8 @@
 #ifndef WIN32
 #include <unistd.h>
 #endif
+
+#include "getopt.h"
 
 typedef enum { SH, CSH, CMD } ShellType;
 
