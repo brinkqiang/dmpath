@@ -54,10 +54,12 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
-#include <getopt.h>
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <windows.h>
+
+#include "getopt_win32.h"
 
 #define	REPLACE_GETOPT		/* use this getopt as the system getopt(3) */
 

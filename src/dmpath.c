@@ -23,7 +23,9 @@
 #include <sys/stat.h>
 
 #ifdef WIN32
-#include "getopt.h"
+#include "getopt_win32.h"
+#else
+#include <getopt.h>
 #endif
 
 typedef enum { SH, CSH, CMD } ShellType;
