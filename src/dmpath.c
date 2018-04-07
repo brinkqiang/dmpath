@@ -97,8 +97,8 @@ static int PathContains(const char* path, const char* elem)
 static void PrintPath(FILE* out, const char* path)
 {
 	if(path == NULL) return;
-	char* p;
-	for(p = path; *p; p++) {
+	char* p = (char*)path;
+	for(; *p; p++) {
 		if(*p == delimiter) {
 			fputc(pathSep, out);
 		} else if(slash_to_backslash && *p == '/') {
