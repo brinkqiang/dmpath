@@ -18,7 +18,10 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-//#include <unistd.h>
+
+#ifndef WIN32
+#include <unistd.h>
+#endif
 
 typedef enum { SH, CSH, CMD } ShellType;
 
@@ -169,7 +172,7 @@ static int dirExists(const char *path)
 	struct stat pstats;
 	int err = stat(path, &pstats);
 #ifdef WIN32
-	if ((err == 0) && pstats.st_mode == _S_IFDIR) return 1;
+	if ((err == 0) && pstats.st_mode & _S_IFDIR) return 1;
 #else
 	if((err == 0) && S_ISDIR(pstats.st_mode)) return 1;
 #endif
