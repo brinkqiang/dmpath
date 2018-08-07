@@ -1,4 +1,22 @@
 # dmpath
+
+Copyright (c) 2013-2018 brinkqiang (brink.qiang@gmail.com)
+
+[dmpath GitHub](https://github.com/brinkqiang/dmpath)
+
+## Build status
+| [Linux][lin-link] | [MacOSX][osx-link] | [Windows][win-link] |
+| :---------------: | :----------------: | :-----------------: |
+| ![lin-badge]      | ![osx-badge]       | ![win-badge]        |
+
+[lin-badge]: https://travis-ci.org/brinkqiang/dmpath.svg?branch=master "Travis build status"
+[lin-link]:  https://travis-ci.org/brinkqiang/dmpath "Travis build status"
+[osx-badge]: https://travis-ci.org/brinkqiang/dmpath.svg?branch=master "Travis build status"
+[osx-link]:  https://travis-ci.org/brinkqiang/dmpath "Travis build status"
+[win-badge]: https://ci.appveyor.com/api/projects/status/github/brinkqiang/dmpath?branch=master&svg=true "AppVeyor build status"
+[win-link]:  https://ci.appveyor.com/project/brinkqiang/dmpath "AppVeyor build status"
+
+## Intro
 A tool to manipulate PATH-like variables to make writing .bashrc files (and their cousins) easier.
 
 <H3>Synopsis</H3>
@@ -92,5 +110,7 @@ Thus <b>eval $(dmpath -s '$ANT_HOME/bin')</b> should work in all shells</DD>
 <DT>-x</DT>
 <DD>Check new path elements for existance (as directories) before adding.</DD>
 </DL>
-<H3>Author</H3>
-Tony Aiuto  (tony.aiuto@gmail.com)
+## Contacts
+[![Join the chat](https://badges.gitter.im/brinkqiang/dmpath/Lobby.svg)](https://gitter.im/brinkqiang/dmpath)
+
+## Thanks
