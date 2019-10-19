@@ -16,7 +16,7 @@ MESSAGE(STATUS "VERSION: ${DMPATH_VERSION}")
 
 OPTION(USE_DMPATH "use dmpath" OFF)
 
-LibImport("dmpath" "src/dmpath")
+DllImport("dmpath" "src/dmpath")
 ExeImport("tools" "")
 ExeImport("test" "dmpath")
 #ADD_CUSTOM_COMMAND(
