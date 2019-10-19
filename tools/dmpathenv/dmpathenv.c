@@ -1,4 +1,4 @@
-/* dmpath.c
+/* dmpathenv.c
  *
  * Name: dmpath
  * Description: tool to add elements to PATH style variables
