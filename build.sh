@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # - install depends tools
 # yum -y install git
@@ -11,16 +11,18 @@
 # git submodule update --init --recursive
 #
 
-# pushd depends_path
+# pushd thirdparty/depends_path
 # libtoolize && aclocal && autoheader && autoconf && automake --add-missing
 # sh configure
 # popd
 
 rm -rf build
-mkdir build
+mkdir -p build
 pushd build
 cmake -DCMAKE_BUILD_TYPE=relwithdebinfo ..
-cmake --build . --config relwithdebinfo
+cmake --build .
 popd
 
 # popd
+
+# echo continue && read -n 1

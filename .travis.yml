@@ -6,33 +6,32 @@ sudo: false
 dist: trusty
 language: cpp
 
-compiler:
-  - gcc
-# - clang
-os:
-  - linux
-# - osx
+matrix:
+    include:
+      -   os: linux
+          compiler: gcc
+          env: 
+            - BUILD_TYPE=relwithdebinfo
+            - GCC_VERSION=7
+            - CC=gcc-7
+            - CXX=g++-7
+          addons:
+            apt:
+              # List of whitelisted in travis packages for ubuntu-trusty can be found here:
+              #   https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-trusty
+              # List of whitelisted in travis apt-sources:
+              #   https://github.com/travis-ci/apt-source-whitelist/blob/master/ubuntu.json
+              sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-5.0']
+              packages: ['cmake', 'autoconf', 'automake', 'gcc-7', 'g++-7', 'clang-5.0']
 
-env:
-# - BUILD_TYPE=Debug
-  - BUILD_TYPE=RelWithDebInfo
-
-addons:
-  apt:
-    # List of whitelisted in travis packages for ubuntu-trusty can be found here:
-    #   https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-trusty
-    # List of whitelisted in travis apt-sources:
-    #   https://github.com/travis-ci/apt-source-whitelist/blob/master/ubuntu.json
-    sources:
-
-    packages:
-      - cmake
-#     - libtool
-      - autoconf
-      - automake 
-#     - gcc-7
-#     - g++-7
-#     - clang-5.0
+      #-   os: osx
+      #    compiler: gcc
+      #    env: 
+      #      - BUILD_TYPE=relwithdebinfo
+      #    addons:
+      #      apt:
+      #        sources: 
+      #        packages: ['cmake', 'autoconf', 'automake', 'gcc-7', 'g++-7', 'clang-5.0']
 
 
 install:
@@ -71,13 +70,13 @@ before_script:
     fi
 
 script:
-  - mkdir -p build && cd build
+  - mkdir -p build && pushd build
   - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE
   - cmake --build .
-  - cd ..
+  - popd
 
 after_success:
-  - "if [ -f bin/dmpath ] ; then bin/dmpath ; fi"
+  - echo success
 
 after_failure:
   - echo failure
@@ -90,7 +89,7 @@ deploy:
   provider: releases
   api_key:
     secure: $GITHUB_ACCESS_TOKEN
-  file: bin/dmpath
+  file: bin/dmpathtest
   skip_cleanup: true
   on:
     branch: master
