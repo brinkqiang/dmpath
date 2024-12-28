@@ -1,5 +1,6 @@
 
 #include "dmpath.h"
+#include "dmutil.h"
 
 bool IsRunAsAdmin() {
 	BOOL isAdmin = FALSE;
@@ -27,7 +28,8 @@ int main() {
 		return 1;
 	}
 
-	AddToPath("C:\\Python500\\");
+	std::string workpath = DMGetRootPath();
+	AddToPath(workpath);
 #endif
 	return 0;
 }
