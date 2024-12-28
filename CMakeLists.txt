@@ -17,21 +17,9 @@ MESSAGE(STATUS "VERSION: ${DMPATH_VERSION}")
 OPTION(USE_DMPATH "use dmpath" OFF)
 
 DllImport("dmpath" "src/dmpath")
+
 ExeImport("tools" "")
-ExeImport("test" "dmpath")
-#ADD_CUSTOM_COMMAND(
-#TARGET dmpathtest
-#PRE_BUILD
-#COMMAND ${CMAKE_COMMAND} -E copy_if_different
-#${CMAKE_CURRENT_SOURCE_DIR}/config/test.csv
-#$<TARGET_FILE_DIR:dmpathtest>
-#)
 
-#INSTALL(DIRECTORY include/ DESTINATION include)
-#INSTALL(TARGETS dmpath
-#        RUNTIME DESTINATION bin
-#        LIBRARY DESTINATION lib
-#        ARCHIVE DESTINATION lib)
-
-#SET(DMPATH_LIBS "dmpath")
-#MARK_AS_ADVANCED(${DMPATH_LIBS})
+IF(PROJECT_IS_TOP_LEVEL)
+    ExeImport("test" "dmpath")
+ENDIF()
