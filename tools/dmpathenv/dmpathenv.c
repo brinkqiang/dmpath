@@ -45,13 +45,13 @@ static	ShellType	shell_type = SH;
 
 static void pversion()
 {
-	printf("dmpath %s, https://github.com/brinkqiang/dmpath\n", "1.0.1");
+	printf("dmpathenv %s, https://github.com/brinkqiang/dmpath\n", "1.0.1");
 }
 
 static void usage()
 {
 	pversion();
-	printf("usage: dmpath [-bcw] [-df] [-e VAR] [-p VAR] elem ...\n");
+	printf("usage: dmpathenv [-bcw] [-df] [-e VAR] [-p VAR] elem ...\n");
 
 	printf("\tOnly one of bcw should be specified.  Default is detected by\n");
 	printf("\texamining $SHELL.\n");
