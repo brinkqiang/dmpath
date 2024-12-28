@@ -48,19 +48,28 @@ set(CPACK_PACKAGE_NAME "dmpath") # 设置包的名字
 set(CPACK_PACKAGE_VENDOR "dmsoft") # 设置包的作者
 set(CPACK_PACKAGE_DESCRIPTION "dmsoft dmpath") # 设置包的描述
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "dmsoft dmpath summary")
-set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/icon/dmpath.ico") # 设置包的图标
-set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}/icon/dmpath.ico")
+set(CPACK_PACKAGE_VERSION "1.0.1") # 设置包的版本
+set(CPACK_PACKAGE_CONTACT "https://github.com/brinkqiang/dmpath") # 设置联系方式
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}") # 设置安装目录
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE") # 设置许可证文件
 
-set(CPACK_PACKAGE_CONTACT "https://github.com/brinkqiang/dmpath")
-set(CPACK_PACKAGE_VERSION "1.0.1")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
+# 设置图标
+set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\icon\\\\dmpath.ico") # 设置安装界面的图标
+set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\icon\\\\dmpath.ico") # 设置安装程序的图标
+set(CPACK_NSIS_MUI_UNICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\icon\\\\dmpath.ico") # 设置卸载程序的图标
 
+# NSIS 特定配置
+set(CPACK_NSIS_DISPLAY_NAME "dmpath") # 设置在“添加/删除程序”中显示的名称
+set(CPACK_NSIS_MODIFY_PATH ON) # 允许用户将程序目录添加到 PATH
+
+# Windows 特定配置
 IF(WIN32)
+    # 安装时执行的额外命令
     SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
     ExecWait '\\\"$INSTDIR\\\\bin\\\\RelWithDebInfo\\\\install.bat\\\"'
     ")
 
+    # 卸载时执行的额外命令
     SET(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
     ExecWait '\\\"$INSTDIR\\\\bin\\\\RelWithDebInfo\\\\uninstall.bat\\\"'
     ")
@@ -68,4 +77,5 @@ ENDIF(WIN32)
 
 set(CPACK_CMD "cpack -V -G NSIS64")
 
+# 包含 CPack 模块
 include(CPack)
