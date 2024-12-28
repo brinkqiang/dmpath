@@ -1,6 +1,10 @@
 cd %~dp0
 set CURRENT_DIR=%~dp0
-set CURRENT_FILE=%~dp0\dmpath.exe
-dmpath.exe --removepath=""%CURRENT_DIR%""
+set CURRENT_FILE=%~dp0dmpath.exe
+
+echo CURRENT_DIR: %CURRENT_DIR%
+echo CURRENT_FILE: %CURRENT_FILE%
+
+dmpath.exe --removepath="%CURRENT_DIR%"
 
 pause
