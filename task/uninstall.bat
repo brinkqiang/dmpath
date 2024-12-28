@@ -1,4 +1,6 @@
 cd %~dp0
-nssm stop dmcrontask
-nssm remove dmcrontask confirm
+set CURRENT_DIR=%~dp0
+set CURRENT_FILE=%~dp0\dmpath.exe
+dmpath.exe --removepath=%CURRENT_DIR%
+
 pause
