@@ -48,7 +48,7 @@ set(CPACK_PACKAGE_NAME "dmpath") # 设置包的名字
 set(CPACK_PACKAGE_VENDOR "dmsoft") # 设置包的作者
 set(CPACK_PACKAGE_DESCRIPTION "dmsoft dmpath") # 设置包的描述
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "dmsoft dmpath summary")
-set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\icon\\\\dmpath.png") # 设置包的图标
+set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\icon\\\\dmpath.ico") # 设置包的图标
 set(CPACK_PACKAGE_CONTACT "https://github.com/brinkqiang/dmpath")
 set(CPACK_PACKAGE_VERSION "1.0.1")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
