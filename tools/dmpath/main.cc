@@ -27,7 +27,7 @@ int main() {
 		return 1;
 	}
 
-	AddToPath("C:\\Python499\\");
+	AddToPath("C:\\Python500\\");
 #endif
 	return 0;
 }

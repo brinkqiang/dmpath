@@ -17,8 +17,8 @@ MESSAGE(STATUS "VERSION: ${DMPATH_VERSION}")
 OPTION(USE_DMPATH "use dmpath" OFF)
 
 LibImport("libdmpath" "src/dmpath")
-
-ExeImport("tools" "libdmpath")
+ModuleImport("dmflags" "thirdparty/dmflags")
+ExeImport("tools" "libdmpath;dmflags")
 
 IF(PROJECT_IS_TOP_LEVEL)
     ExeImport("test" "libdmpath")
