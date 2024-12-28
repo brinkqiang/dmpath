@@ -31,6 +31,10 @@
 #include <mach-o/dyld.h>
 #endif
 
+#if _WIN32
+#pragma warning(disable : 4996)
+#endif
+
 // tolua_begin
 
 #ifdef _WIN32

@@ -1,6 +1,7 @@
 
 #include "dmpath.h"
 #include "dmutil.h"
+#include "dmflags.h"
 
 bool IsRunAsAdmin() {
 	BOOL isAdmin = FALSE;
@@ -19,8 +20,11 @@ bool IsRunAsAdmin() {
 	return isAdmin == TRUE;
 }
 
-int main() {
+int main(int argc, char** argv) {
 	// 示例：将 Python 安装路径添加到 PATH
+	DMFLAGS_INIT(argc, argv);
+
+
 #ifdef _WIN32
 
 	if (!IsRunAsAdmin()) {
