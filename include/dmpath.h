@@ -8,15 +8,8 @@
 #include <mach-o/dyld.h>
 #endif
 
-#ifdef WIN32
-HMODULE GetSelfModuleHandle()
-{
-    MEMORY_BASIC_INFORMATION mbi;
-    return ((::VirtualQuery(GetSelfModuleHandle, &mbi, sizeof(mbi)) != 0)
-        ? (HMODULE)mbi.AllocationBase : NULL);
-}
+#ifdef _WIN32
+bool AddToPath(const std::string& newPath);
 #endif
-
- const char* DMAPI DMGetDllPath();
 
 #endif // __DMPATH_H_INCLUDE__

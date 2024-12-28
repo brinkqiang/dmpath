@@ -16,10 +16,10 @@ MESSAGE(STATUS "VERSION: ${DMPATH_VERSION}")
 
 OPTION(USE_DMPATH "use dmpath" OFF)
 
-DllImport("dmpath" "src/dmpath")
+LibImport("libdmpath" "src/dmpath")
 
-ExeImport("tools" "")
+ExeImport("tools" "libdmpath")
 
 IF(PROJECT_IS_TOP_LEVEL)
-    ExeImport("test" "dmpath")
+    ExeImport("test" "libdmpath")
 ENDIF()
