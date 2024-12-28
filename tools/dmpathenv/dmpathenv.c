@@ -24,6 +24,7 @@
 
 #ifdef WIN32
 #include "getopt_win32.h"
+#define strdup _strdup
 #else
 #include <getopt.h>
 #endif
