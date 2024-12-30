@@ -23,8 +23,15 @@ dmpath --addpath=<path> or --removepath=<path>
 ```
 
 ## set pwd to path
+
+unix like
 ```
 dmpath --addpath=$(pwd) or --removepath=$(pwd)
+```
+
+win
+```
+dmpath --addpath="%cd%" or dmpath --removepath="%cd%"
 ```
 
 ## Thanks
