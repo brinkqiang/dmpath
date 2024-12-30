@@ -120,11 +120,14 @@ macro(ExeImport ModulePath DependsLib)
             ${CMAKE_CURRENT_SOURCE_DIR}/${ModulePath}/${subdir}/*.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/${ModulePath}/${subdir}/*.h)
 
+            FILE(GLOB_RECURSE RC_SOURCES
+            ${CMAKE_CURRENT_SOURCE_DIR}/${ModulePath}/${subdir}/*.rc)
+
             LIST(FILTER BIN_SOURCES EXCLUDE REGEX "${CMAKE_CURRENT_SOURCE_DIR}/${ModulePath}/${subdir}/tpl/*")
 
             MESSAGE(STATUS "BIN_SOURCES ${LIB_SOURCES}")
 
-            ADD_EXECUTABLE(${subdir} ${BIN_SOURCES})
+            ADD_EXECUTABLE(${subdir} ${BIN_SOURCES} ${RC_SOURCES})
             TARGET_LINK_LIBRARIES(${subdir} ${DependsLib})
         ENDFOREACH()
     ENDIF()

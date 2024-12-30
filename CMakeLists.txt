@@ -16,6 +16,10 @@ MESSAGE(STATUS "VERSION: ${DMPATH_VERSION}")
 
 OPTION(USE_DMPATH "use dmpath" OFF)
 
+if(WIN32)
+    enable_language(RC)
+endif()
+
 LibImport("libdmpath" "src/dmpath")
 ModuleImport("dmflags" "thirdparty/dmflags")
 ExeImport("tools" "libdmpath;dmflags")
@@ -57,13 +61,22 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE") # 设置�
 set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\icon\\\\dmpath.ico") # 设置安装界面的图标
 set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\icon\\\\dmpath.ico") # 设置安装程序的图标
 set(CPACK_NSIS_MUI_UNICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\icon\\\\dmpath.ico") # 设置卸载程序的图标
+set(CPACK_NSIS_INSTALLED_ICON_NAME "${CMAKE_CURRENT_SOURCE_DIR}\\\\icon\\\\dmpath.ico") # 设置可执行程序的图标
 
 # NSIS 特定配置
 set(CPACK_NSIS_DISPLAY_NAME "dmpath") # 设置在“添加/删除程序”中显示的名称
 set(CPACK_NSIS_MODIFY_PATH ON) # 允许用户将程序目录添加到 PATH
 
+
+
 # Windows 特定配置
 IF(WIN32)
+    # 指定生成桌面快捷方式
+    set(CPACK_NSIS_CREATE_ICONS_EXTRA
+        "CreateShortCut \\\"$DESKTOP\\\\dmpath.lnk\\\" \\\"$INSTDIR\\\\bin\\\\RelWithDebInfo\\\\dmpath.exe\\\"")
+        
+    set(CPACK_NSIS_DELETE_ICONS_EXTRA
+        "Delete \\\"$INSTDIR\\\\bin\\\\RelWithDebInfo\\\\dmpath.exe\\\"")
     # 安装时执行的额外命令
     SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
     ExecWait '\\\"$INSTDIR\\\\bin\\\\RelWithDebInfo\\\\install.bat\\\"'
