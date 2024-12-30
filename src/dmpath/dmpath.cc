@@ -244,7 +244,7 @@ bool RemoveFromPath(const std::string& pathToRemove) {
         shellConfig = std::string(home) + "/.zshrc"; // 优先支持 zsh
     }
 
-    // 读取现有的 PATH
+    // 读取现有的配置文件内容
     std::ifstream configFile(shellConfig);
     if (!configFile) {
         std::cerr << "Error: Unable to open shell configuration file: " << shellConfig << std::endl;
@@ -257,29 +257,49 @@ bool RemoveFromPath(const std::string& pathToRemove) {
 
     std::string content = configContent.str();
     std::string exportPathLine = "export PATH=";
-    std::size_t pathPos = content.find(pathToRemove);
 
-    // 检查路径是否存在
-    if (pathPos == std::string::npos) {
-        std::cerr << "Path not found in shell configuration: " << pathToRemove << std::endl;
-        return false;
+    // 精确匹配路径（包括分隔符）
+    std::string targetPattern = ":" + pathToRemove;
+    size_t startPos = content.find(targetPattern);
+
+    if (startPos == std::string::npos) {
+        // 尝试匹配路径位于 PATH 末尾的情况
+        targetPattern = pathToRemove + "\"";
+        startPos = content.find(targetPattern);
+        if (startPos == std::string::npos) {
+            std::cerr << "Path not found in shell configuration: " << pathToRemove << std::endl;
+            return false;
+        }
     }
 
-    // 移除路径
-    std::string newContent = content;
-    newContent.erase(pathPos, pathToRemove.length());
+    // 删除目标路径
+    size_t endPos = startPos + targetPattern.length();
+    if (content[startPos] == ':') {
+        --startPos; // 移除前导冒号
+    }
 
-    // 写入更新后的文件
+    content.erase(startPos, endPos - startPos);
+
+    // 删除与路径相关的注释
+    size_t commentPos = content.find("# Added by AddToPath function", startPos);
+    if (commentPos != std::string::npos) {
+        size_t lineEnd = content.find('\n', commentPos);
+        if (lineEnd != std::string::npos) {
+            content.erase(commentPos, lineEnd - commentPos + 1); // 删除注释行
+        }
+    }
+
+    // 写入更新后的配置文件
     std::ofstream configFileOut(shellConfig);
     if (!configFileOut) {
         std::cerr << "Error: Unable to write to shell configuration file: " << shellConfig << std::endl;
         return false;
     }
 
-    configFileOut << newContent;
+    configFileOut << content;
     configFileOut.close();
 
-    std::cout << "Successfully removed path. Please run 'source " << shellConfig << "' or restart your shell to apply changes." << std::endl;
+    std::cout << "Successfully removed path and related comments. Please run 'source " << shellConfig << "' or restart your shell to apply changes." << std::endl;
     return true;
 }
 #endif
