@@ -31,7 +31,7 @@ dmpath --addpath=$(pwd) or --removepath=$(pwd)
 
 win
 ```
-dmpath --addpath="%cd%" or dmpath --removepath="%cd%"
+dmpath --addpath="%cd%" or --removepath="%cd%"
 ```
 
 ## Thanks
