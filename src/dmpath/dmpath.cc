@@ -1,5 +1,6 @@
 
 #include "dmpath.h"
+#include "dmlog.hpp"
 
 #ifdef _WIN32
 bool IsRunAsAdmin() {
@@ -207,7 +208,7 @@ bool AddToPath(const std::string& newPath) {
     configFile.close();
 
     std::string content = configContent.str();
-    std::string exportPathLine = "export PATH=";
+    std::string exportPathLine = fmt::format("export PATH=\"$PATH:{}\" ## Added by AddToPath function\n", newPath);
 
     // 检查 PATH 是否已包含新路径
     if (content.find(newPath) != std::string::npos) {
@@ -222,8 +223,7 @@ bool AddToPath(const std::string& newPath) {
         return false;
     }
 
-    configFileOut << "\n# Added by AddToPath function\n";
-    configFileOut << exportPathLine << "\"$PATH:" << newPath << "\"" << std::endl;
+    configFileOut << exportPathLine;
 
     configFileOut.close();
 
@@ -256,38 +256,20 @@ bool RemoveFromPath(const std::string& pathToRemove) {
     configFile.close();
 
     std::string content = configContent.str();
-    std::string exportPathLine = "export PATH=";
+    std::string exportPathLine = fmt::format("export PATH=\"$PATH:{}\" ## Added by AddToPath function\n", pathToRemove);
 
-    // 精确匹配路径（包括分隔符）
-    std::string targetPattern = ":" + pathToRemove;
-    size_t startPos = content.find(targetPattern);
+
+    size_t startPos = content.find(exportPathLine);
 
     if (startPos == std::string::npos) {
-        // 尝试匹配路径位于 PATH 末尾的情况
-        targetPattern = pathToRemove + "\"";
-        startPos = content.find(targetPattern);
-        if (startPos == std::string::npos) {
-            std::cerr << "Path not found in shell configuration: " << pathToRemove << std::endl;
-            return false;
-        }
+		std::cerr << "Path not found in shell configuration: " << pathToRemove << std::endl;
+		return false;
     }
 
     // 删除目标路径
-    size_t endPos = startPos + targetPattern.length();
-    if (content[startPos] == ':') {
-        --startPos; // 移除前导冒号
-    }
+    size_t endPos = startPos + exportPathLine.length();
 
     content.erase(startPos, endPos - startPos);
-
-    // 删除与路径相关的注释
-    size_t commentPos = content.find("# Added by AddToPath function", startPos);
-    if (commentPos != std::string::npos) {
-        size_t lineEnd = content.find('\n', commentPos);
-        if (lineEnd != std::string::npos) {
-            content.erase(commentPos, lineEnd - commentPos + 1); // 删除注释行
-        }
-    }
 
     // 写入更新后的配置文件
     std::ofstream configFileOut(shellConfig);
