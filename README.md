@@ -18,5 +18,8 @@ Copyright (c) 2013-2018 brinkqiang (brink.qiang@gmail.com)
 
 
 ## Intro
+```
+dmpath --addpath=<path> or --removepath=<path>
+```
 
 ## Thanks
