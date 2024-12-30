@@ -156,6 +156,16 @@ bool RemoveFromPath(const std::string& pathToRemove) {
 	return true;
 }
 #else
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 bool AddToPath(const std::string& newPath) {
     const char* home = getenv("HOME");
     if (!home) {
