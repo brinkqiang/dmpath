@@ -27,7 +27,7 @@ dmpath --addpath=<path> or --removepath=<path>
 unix like
 ```
 dmpath --addpath=$(pwd)
-dmpath -removepath=$(pwd)
+dmpath --removepath=$(pwd)
 ```
 
 win
