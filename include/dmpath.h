@@ -8,9 +8,7 @@
 #include <mach-o/dyld.h>
 #endif
 
-#ifdef _WIN32
 bool AddToPath(const std::string& newPath);
 bool RemoveFromPath(const std::string& pathToRemove);
-#endif
 
 #endif // __DMPATH_H_INCLUDE__

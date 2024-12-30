@@ -155,4 +155,105 @@ bool RemoveFromPath(const std::string& pathToRemove) {
 
 	return true;
 }
+#else
+bool AddToPath(const std::string& newPath) {
+    const char* home = getenv("HOME");
+    if (!home) {
+        std::cerr << "Error: HOME environment variable not set." << std::endl;
+        return false;
+    }
+
+    std::string shellConfig = std::string(home) + "/.bashrc";
+    struct stat buffer;
+    if (stat((std::string(home) + "/.zshrc").c_str(), &buffer) == 0) {
+        shellConfig = std::string(home) + "/.zshrc"; // 优先支持 zsh
+    }
+
+    // 读取现有的 PATH
+    std::ifstream configFile(shellConfig);
+    if (!configFile) {
+        std::cerr << "Error: Unable to open shell configuration file: " << shellConfig << std::endl;
+        return false;
+    }
+
+    std::ostringstream configContent;
+    configContent << configFile.rdbuf();
+    configFile.close();
+
+    std::string content = configContent.str();
+    std::string exportPathLine = "export PATH=";
+
+    // 检查 PATH 是否已包含新路径
+    if (content.find(newPath) != std::string::npos) {
+        std::cerr << "Path already exists in shell configuration: " << newPath << std::endl;
+        return false;
+    }
+
+    // 添加新路径
+    std::ofstream configFileOut(shellConfig, std::ios::app);
+    if (!configFileOut) {
+        std::cerr << "Error: Unable to write to shell configuration file: " << shellConfig << std::endl;
+        return false;
+    }
+
+    configFileOut << "\n# Added by AddToPath function\n";
+    configFileOut << exportPathLine << "\"$PATH:" << newPath << "\"" << std::endl;
+
+    configFileOut.close();
+
+    std::cout << "Successfully added path. Please run 'source " << shellConfig << "' or restart your shell to apply changes." << std::endl;
+    return true;
+}
+
+bool RemoveFromPath(const std::string& pathToRemove) {
+    const char* home = getenv("HOME");
+    if (!home) {
+        std::cerr << "Error: HOME environment variable not set." << std::endl;
+        return false;
+    }
+
+    std::string shellConfig = std::string(home) + "/.bashrc";
+    struct stat buffer;
+    if (stat((std::string(home) + "/.zshrc").c_str(), &buffer) == 0) {
+        shellConfig = std::string(home) + "/.zshrc"; // 优先支持 zsh
+    }
+
+    // 读取现有的 PATH
+    std::ifstream configFile(shellConfig);
+    if (!configFile) {
+        std::cerr << "Error: Unable to open shell configuration file: " << shellConfig << std::endl;
+        return false;
+    }
+
+    std::ostringstream configContent;
+    configContent << configFile.rdbuf();
+    configFile.close();
+
+    std::string content = configContent.str();
+    std::string exportPathLine = "export PATH=";
+    std::size_t pathPos = content.find(pathToRemove);
+
+    // 检查路径是否存在
+    if (pathPos == std::string::npos) {
+        std::cerr << "Path not found in shell configuration: " << pathToRemove << std::endl;
+        return false;
+    }
+
+    // 移除路径
+    std::string newContent = content;
+    newContent.erase(pathPos, pathToRemove.length());
+
+    // 写入更新后的文件
+    std::ofstream configFileOut(shellConfig);
+    if (!configFileOut) {
+        std::cerr << "Error: Unable to write to shell configuration file: " << shellConfig << std::endl;
+        return false;
+    }
+
+    configFileOut << newContent;
+    configFileOut.close();
+
+    std::cout << "Successfully removed path. Please run 'source " << shellConfig << "' or restart your shell to apply changes." << std::endl;
+    return true;
+}
 #endif
