@@ -26,12 +26,14 @@ dmpath --addpath=<path> or --removepath=<path>
 
 unix like
 ```
-dmpath --addpath=$(pwd) or --removepath=$(pwd)
+dmpath --addpath=$(pwd)
+dmpath -removepath=$(pwd)
 ```
 
 win
 ```
-dmpath --addpath="%cd%" or --removepath="%cd%"
+dmpath --addpath="%cd%"
+dmpath --removepath="%cd%"
 ```
 
 ## Thanks
