@@ -14,12 +14,6 @@ int main(int argc, char** argv) {
 		std::cout << ProgramUsage();
 		return 1;
 	}
-#ifdef _WIN32
-	if (!IsRunAsAdmin()) {
-		std::cerr << "This program requires administrator privileges. Please run as administrator." << std::endl;
-		return 1;
-	}
-#endif
 
 	// Ìí¼ÓÂ·¾¶
 	if (!FLAGS_addpath.empty()) {

@@ -22,6 +22,11 @@ bool IsRunAsAdmin() {
 
 bool AddToPath(const std::string& newPath)
 {
+	if (!IsRunAsAdmin()) {
+		std::cerr << "This program requires administrator privileges. Please run as administrator." << std::endl;
+		return false;
+	}
+
 	HKEY hKey;
 	LONG result;
 
@@ -93,6 +98,11 @@ bool AddToPath(const std::string& newPath)
 
 
 bool RemoveFromPath(const std::string& pathToRemove) {
+	if (!IsRunAsAdmin()) {
+		std::cerr << "This program requires administrator privileges. Please run as administrator." << std::endl;
+		return false;
+	}
+		
 	HKEY hKey;
 	LONG result;
 

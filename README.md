@@ -22,4 +22,9 @@ Copyright (c) 2013-2018 brinkqiang (brink.qiang@gmail.com)
 dmpath --addpath=<path> or --removepath=<path>
 ```
 
+## set pwd to path
+```
+dmpath --addpath=$(pwd) or --removepath=$(pwd)
+```
+
 ## Thanks

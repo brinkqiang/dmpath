@@ -8,10 +8,6 @@
 #include <mach-o/dyld.h>
 #endif
 
-#ifdef _WIN32
-bool IsRunAsAdmin();
-#endif
-
 bool AddToPath(const std::string& newPath);
 bool RemoveFromPath(const std::string& pathToRemove);
 
