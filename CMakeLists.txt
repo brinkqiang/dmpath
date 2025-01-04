@@ -28,8 +28,8 @@ IF(WIN32)
 ADD_CUSTOM_COMMAND(
 TARGET dmpath
 PRE_BUILD
-COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/task/install.bat $<TARGET_FILE_DIR:dmpath>
-COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/task/uninstall.bat $<TARGET_FILE_DIR:dmpath>
+COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/env/install.bat $<TARGET_FILE_DIR:dmpath>
+COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/env/uninstall.bat $<TARGET_FILE_DIR:dmpath>
 COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE $<TARGET_FILE_DIR:dmpath>
 )
 ENDIF(WIN32)
