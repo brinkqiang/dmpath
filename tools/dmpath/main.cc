@@ -17,6 +17,11 @@ int main(int argc, char** argv) {
 
 	// Ìí¼ÓÂ·¾¶
 	if (!FLAGS_addpath.empty()) {
+
+		if (!FLAGS_addpath.empty() && FLAGS_addpath.back() == '"') {
+			FLAGS_addpath.pop_back();
+		}
+
 		if (AddToPath(FLAGS_addpath)) {
 			std::cout << "Path added successfully: " << FLAGS_addpath << std::endl;
 		}
@@ -27,6 +32,11 @@ int main(int argc, char** argv) {
 
 	// ÒÆ³ýÂ·¾¶
 	if (!FLAGS_removepath.empty()) {
+
+		if (!FLAGS_removepath.empty() && FLAGS_removepath.back() == '"') {
+			FLAGS_removepath.pop_back();
+		}
+
 		if (RemoveFromPath(FLAGS_removepath)) {
 			std::cout << "Path removed successfully: " << FLAGS_removepath << std::endl;
 		}

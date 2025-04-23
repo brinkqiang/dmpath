@@ -70,7 +70,7 @@ bool AddToPath(const std::string& newPath)
 		updatedPath += newPath;
 
 		// 写入更新后的 PATH 值
-		result = RegSetValueEx(hKey, "Path", 0, REG_EXPAND_SZ, (const BYTE*)updatedPath.c_str(), updatedPath.size() + 1);
+		result = RegSetValueEx(hKey, "Path", 0, REG_EXPAND_SZ, (const BYTE*)updatedPath.c_str(), updatedPath.size());
 
 		if (result == ERROR_SUCCESS) {
 			std::cout << "Successfully updated PATH." << std::endl;
@@ -157,7 +157,7 @@ bool RemoveFromPath(const std::string& pathToRemove) {
 		}
 
 		// 写入更新后的 PATH 值
-		result = RegSetValueEx(hKey, "Path", 0, REG_EXPAND_SZ, (const BYTE*)updatedPath.c_str(), updatedPath.size() + 1);
+		result = RegSetValueEx(hKey, "Path", 0, REG_EXPAND_SZ, (const BYTE*)updatedPath.c_str(), updatedPath.size());
 
 		if (result == ERROR_SUCCESS) {
 			std::cout << "Successfully removed path from PATH." << std::endl;
