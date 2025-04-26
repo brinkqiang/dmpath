@@ -7,7 +7,7 @@ DEFINE_string(addpath, "", "Path to add to the PATH environment variable");
 DEFINE_string(removepath, "", "Path to remove from the PATH environment variable");
 
 int main(int argc, char** argv) {
-	// 示例：将 Python 安装路径添加到 PATH
+
 	DMFLAGS_INIT(argc, argv);
 	SetUsageMessage("Usage: dmpath --addpath=<path> or --removepath=<path>");
 	if (argc == 1) {
@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	// 添加路径
+	// 娣诲姞璺緞
 	if (!FLAGS_addpath.empty()) {
 
 		if (!FLAGS_addpath.empty() && FLAGS_addpath.back() == '"') {
@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	// 移除路径
+	// 绉婚櫎璺緞
 	if (!FLAGS_removepath.empty()) {
 
 		if (!FLAGS_removepath.empty() && FLAGS_removepath.back() == '"') {
